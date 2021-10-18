@@ -2,7 +2,7 @@
 Barbar Service is a project for demo of simple distribute authentication Service. 
 
 ## Project Structure
-    Basicly we reffer to Domain Driven Design and Clean Architecture for this code.
+    Basicaly we reffer to Domain Driven Design and Clean Architecture for this code.
 
     - cmd  // directory for handle command
         |- grpc_user.go
@@ -28,9 +28,9 @@ Barbar Service is a project for demo of simple distribute authentication Service
     - main.go is a root running program to call functions of the cases
 
 ## Tech Stack 
-* Overral Basic Programming leaguage use golang 
+* Overall Basic Programming language use golang 
 * Datastore with MongoDB
-* Communicaton with HTTP Rest API (for external connection) and GRPC (internal connection)
+* The Communication with HTTP Rest API (for external connection) and GRPC (internal connection)
 * Redis for caching model, for this case cache should be store valid Token
     
 ## Service Design
@@ -68,8 +68,12 @@ After this program started without problem, we can hit the API for User-Service 
   ```shell
   $ docker-compose up
   ```
+* run init index for mongodb
+  ```shell
+    $ docker run barbar:latest init-index-mongo
+  ```
 
-### CURL 
+### API with CURL 
 * Register
 ```shell
 curl --location --request POST 'localhost:3000/user-service/api/v1/users' \
@@ -104,7 +108,10 @@ curl --location --request GET 'localhost:3000/user-service/api/v1/users/a80d3a5d
 --header 'Authorization: Bearer  <token>'
 ```
 * Get All User
-  
+```shell
+curl --location --request GET 'localhost:3000/user-service/api/v1/users' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxQGVtYWlsLmNvbSIsInVzZXJJZCI6ImQ2MjEyOGVlLTA3OWMtNDU5MS04MmQ0LTg3NWU0NmZkODI2ZCIsImV4cCI6MTYzNDU1Mzk2MSwianRpIjoiZjlmY2YwZDEtZGExNy00NGJlLTgzNzItNmEwN2UyODgwNzZlIiwic3ViIjoidXNlciJ9.k_Bdns2Aghk_5dPNXx0DgPlYc0Zt7W05oZ2JbRYJv-Q'
+```  
 * Update User
 ```shell
 curl --location --request PUT 'localhost:3000/user-service/api/v1/users/a80d3a5d-3452-4d6a-9ace-055bebcc9523' \

@@ -3,9 +3,11 @@ package repository
 import (
 	"barbar/domain/users/entity"
 	"barbar/pkg/redis"
+	"barbar/pkg/utils"
 	"context"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 type UserRepositoryInterface interface {
@@ -60,8 +62,20 @@ func (u userRepository) GetById(ctx context.Context, id string) (user *entity.Us
 	return user, nil
 }
 
-func (u userRepository) GetAllUser(ctx context.Context, search string, sortBy map[string]bool, limit, offset int64) ([]entity.User, error) {
-	panic("implement me")
+func (u userRepository) GetAllUser(ctx context.Context,
+	search string, sortBy map[string]bool, limit, offset int64) (users []entity.User, err error) {
+	findOptions := options.Find()
+	findOptions.SetSort(utils.MongoSetSortFromMap(sortBy))
+	findOptions.SetLimit(limit)
+	findOptions.SetSkip((offset) * limit)
+
+	cursor, err := u.db.Collection("users").Find(ctx, bson.M{}, findOptions)
+	if err != nil {
+		return
+	}
+
+	err = cursor.All(ctx, &users)
+	return users, err
 }
 
 func (u userRepository) GetByEmail(ctx context.Context, email string) (user *entity.User, err error) {

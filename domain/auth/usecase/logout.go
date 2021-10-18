@@ -7,8 +7,8 @@ import (
 )
 
 func (u *authUseCase) Logout(ctx context.Context, userId string) (err error) {
-	// get last login
-	auths, err := u.authRepo.GetAllAuth(ctx, userId, map[string]bool{"createdAt": false}, 1, 0)
+	// get last login set order by _id descending
+	auths, err := u.authRepo.GetAllAuth(ctx, userId, map[string]bool{"_id": false}, 1, 0)
 	if err != nil {
 		return
 	}

@@ -1,70 +1,70 @@
 version: '3.7'
 
 services:
-#  http-user:
-#    image: barbar:latest
-#    ports:
-#      - "3000:3000"
-#    expose:
-#      - "3000"
-#    command: "http-user"
-#    depends_on:
-#      redis:
-#        condition: service_started
-#      mongo:
-#        condition: service_started
-#    restart: always
-#    links:
-#      - mongo
-#      - redis
-#    volumes:
-#      - barbar:/var/go
-#    networks:
-#      - barbar
-#
-#  http-auth:
-#    image: barbar:latest
-#    ports:
-#      - "3001:3001"
-#    expose:
-#      - "3001"
-#    command: "http-auth"
-#    depends_on:
-#      redis:
-#        condition: service_started
-#      mongo:
-#        condition: service_started
-#      grpc-user:
-#        condition: service_started
-#    restart: always
-#    links:
-#      - mongo
-#      - redis
-#      - grpc-user
-#    volumes:
-#      - barbar:/var/go
-#    networks:
-#      - barbar
-#  grpc-user:
-#    image: barbar:latest
-#    ports:
-#      - "3002:3002"
-#    expose:
-#      - "3002"
-#    command: "grpc-user"
-#    depends_on:
-#      redis:
-#        condition: service_started
-#      mongo:
-#        condition: service_started
-#    restart: always
-#    links:
-#      - mongo
-#      - redis
-#    volumes:
-#      - barbar:/var/go
-#    networks:
-#      - barbar
+  http-user:
+    image: barbar:latest
+    ports:
+      - "3000:3000"
+    expose:
+      - "3000"
+    command: "http-user"
+    depends_on:
+      redis:
+        condition: service_started
+      mongo:
+        condition: service_started
+    restart: always
+    links:
+      - mongo
+      - redis
+    volumes:
+      - barbar:/var/go
+    networks:
+      - barbar
+
+  http-auth:
+    image: barbar:latest
+    ports:
+      - "3001:3001"
+    expose:
+      - "3001"
+    command: "http-auth"
+    depends_on:
+      redis:
+        condition: service_started
+      mongo:
+        condition: service_started
+      grpc-user:
+        condition: service_started
+    restart: always
+    links:
+      - mongo
+      - redis
+      - grpc-user
+    volumes:
+      - barbar:/var/go
+    networks:
+      - barbar
+  grpc-user:
+    image: barbar:latest
+    ports:
+      - "3002:3002"
+    expose:
+      - "3002"
+    command: "grpc-user"
+    depends_on:
+      redis:
+        condition: service_started
+      mongo:
+        condition: service_started
+    restart: always
+    links:
+      - mongo
+      - redis
+    volumes:
+      - barbar:/var/go
+    networks:
+      - barbar
   mongo:
     image: mongo:latest
     restart: always

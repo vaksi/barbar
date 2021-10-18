@@ -57,6 +57,6 @@ COPY --from=builder $BUILDDIR/.env_docker .env
 
 VOLUME $BUILDDIR
 
-EXPOSE 3000 3001 3002 3003
+EXPOSE 3000 3001 3002
 
 ENTRYPOINT ["./barbar"]

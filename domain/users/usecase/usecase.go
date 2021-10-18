@@ -21,10 +21,6 @@ type userUseCase struct {
 	userRepo repository.UserRepositoryInterface
 }
 
-func (u *userUseCase) Delete(ctx context.Context, id string) error {
-	panic("implement me")
-}
-
 func NewUserUseCase(userRepository repository.UserRepositoryInterface) *userUseCase {
 	return &userUseCase{
 		userRepo: userRepository,

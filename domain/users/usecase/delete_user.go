@@ -7,7 +7,7 @@ import (
 	"github.com/opentracing/opentracing-go"
 )
 
-func (u *userUseCase) DeleteUser(ctx context.Context, userId string) (err error) {
+func (u *userUseCase) Delete(ctx context.Context, userId string) (err error) {
 	span, ctx := opentracing.StartSpanFromContext(ctx, "use_case.DeleteUser")
 	defer span.Finish()
 

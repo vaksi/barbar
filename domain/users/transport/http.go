@@ -57,6 +57,7 @@ func RunHttp() {
 		r.Put("/users/{uid}", userHandler.UpdateUser)
 		r.Delete("/users/{uid}", userHandler.DeleteUser)
 		r.Get("/users/{uid}", userHandler.GetUserById)
+		r.Get("/users", userHandler.GetAllUser)
 	})
 
 	fmt.Println("Running User Service on PORT " + cfg.UserHTTP.Port)
@@ -147,5 +148,20 @@ func (h *userHttpHandler) GetUserById(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 	render.JSON(w, r, user)
+	return
+}
+
+func (h *userHttpHandler) GetAllUser(w http.ResponseWriter, r *http.Request) {
+	users, err := h.userUseCase.GetAllUser(r.Context(), "", map[string]bool{
+		"_id": false,
+	}, 10, 0)
+	if err != nil {
+		logger.Error(err)
+		utils.ErrorResponse(w, r, err)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	render.JSON(w, r, users)
 	return
 }
