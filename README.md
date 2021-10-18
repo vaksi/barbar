@@ -1,4 +1,4 @@
-#Barbar Service 
+# Barbar Service 
 Barbar Service is a project for demo of simple distribute authentication Service. 
 
 ## Project Structure
