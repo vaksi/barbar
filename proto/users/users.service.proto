@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package users;
+option go_package="proto/users";
+
+import "users.general.proto";
+
+service UsersService{
+    rpc GetUserByEmail(GetUserByEmailRequest) returns (User) {};
+}
