@@ -13,9 +13,7 @@ install: go-get
 
 proto-barbar:
 	@echo "  >  Start Generate Proto..."
-	protoc --go_out=proto/users/ --go_opt=paths=source_relative --go-grpc_out=proto/users/ --go-grpc_opt=paths=source_relative --proto_path=proto/users/ proto/users/users.general.proto
-	protoc --go_out=proto/users/ --go_opt=paths=source_relative --go-grpc_out=proto/users/ --go-grpc_opt=paths=source_relative --proto_path=proto/users/ proto/users/users.service.proto
-	protoc --go_out=proto/auth/ --go_opt=paths=source_relative --go-grpc_out=proto/auth/ --go-grpc_opt=paths=source_relative --proto_path=proto/auth/ proto/auth/auth.general.proto
-	protoc --go_out=proto/auth/ --go_opt=paths=source_relative --go-grpc_out=proto/auth/ --go-grpc_opt=paths=source_relative --proto_path=proto/auth/ proto/auth/auth.service.proto
+	protoc -I=proto/users --go_out=plugins=grpc:. proto/users/*.proto
+	protoc -I=proto/auth --go_out=plugins=grpc:. proto/auth/*.proto
 	@echo "  >  Done Generate Proto..."
 	@echo "Process took $$(($$(date +%s)-$(STIME))) seconds"
